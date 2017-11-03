@@ -1,0 +1,422 @@
+<!DOCTYPE html><!-- -*- engine:django -*- -->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Index of {{ directory | escape }}</title>
+        <style type="text/css">
+         @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
+         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+         * {
+             box-sizing: border-box;
+         }
+
+         html {
+             font-family: 'Open Sans', sans-serif;
+             background: #eee;
+         }
+
+         body .body-wrapper {
+             max-width: 860px;
+             margin: 0 auto;
+             box-shadow: 0 0px 2px 0px rgba(0, 0, 0, .15);
+             background: #fff;
+         }
+
+
+         h1.title {
+             display: block;
+             margin: 0 auto;
+             text-align: center;
+             font-size: 32px;
+             font-weight: 300;
+         }
+
+         .books.cards {
+             display: flex;
+             flex-direction: row;
+             flex-wrap: wrap;
+             align-items: stretch;
+             margin: 10px auto;
+             justify-content: center;
+             padding: 5px;
+         }
+
+         .books.cards .book {
+             display: flex;
+             flex-direction: column;
+             justify-content: space-between;
+             flex: 0 0 150px;
+             overflow: hidden;
+             margin: 20px 15px;
+             border: 1px solid #d3d3d3;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+             border-radius: 2px;
+         }
+
+         .books.cards .book:hover {
+             border: 1px solid #b0b0b0;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
+         }
+
+         .books.cards .book .cover {
+             display: block;
+             flex: 1 0 auto;
+             max-width: 100%;
+         }
+
+         .books.cards .book .cover img {
+             max-width: 100%;
+         }
+
+         .books.cards .book .meta {
+             display: block;
+             padding: 2px 5px;
+         }
+
+         .books.cards .book .meta .title {
+             display: block;
+             font-weight: bold;
+             font-size: 14px;
+             color: inherit;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             margin-bottom: 2px;
+         }
+
+         .books.cards .book .meta .author {
+             display: block;
+             color: inherit;
+             font-size: 12px;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             margin-bottom: 3px;
+         }
+
+         .books.cards .book .meta .series {
+             display: block;
+             font-size: 12px;
+             color: inherit;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             /*overflow: hidden;*/
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             text-transform: uppercase;
+         }
+
+         .books.cards .book .meta .series .name {
+             display: inline-block;
+             color: inherit;
+             text-decoration: none;
+         }
+
+         .books.cards .book .meta .series .index {
+             display: inline-block;
+             color: inherit;
+             text-decoration: none;
+         }
+
+         .books.list {
+             display: block;
+             margin: 10px 5px;
+         }
+
+         .books.list .book {
+             display: flex;
+             flex-direction: row;
+             justify-content: flex-start;
+             border-bottom: 1px solid rgba(0, 0, 0, .15);
+             margin: 0 5px;
+             padding: 10px 5px;
+             padding-bottom: 5px;
+             /**/
+             margin: 10px 5px;
+             border: 1px solid #d3d3d3;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+             border-radius: 2px;
+         }
+
+         .books.list .book:hover {
+             /*background: rgba(0,0,0,.05);*/
+             border: 1px solid #b0b0b0;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
+         }
+
+         .books.list .book .cover {
+             flex: 0 0 45px;
+         }
+
+         .books.list .book .cover img {
+             max-width: 100%;
+         }
+
+         .books.list .book .meta {
+             flex: 1;
+             padding: 4px 10px;
+         }
+
+         .books.list .book .meta .title {
+             display: block;
+             font-weight: bold;
+             font-size: 14px;
+             color: inherit;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             margin-bottom: 2px;
+         }
+
+         .books.list .book .meta .author {
+             display: block;
+             color: inherit;
+             font-size: 12px;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             margin-bottom: 3px;
+         }
+
+         .books.list .book .meta .series {
+             display: block;
+             font-size: 12px;
+             color: inherit;
+             text-decoration: none;
+             width: 100%;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             text-transform: uppercase;
+         }
+
+         .books.list .book .meta .series .name {
+             display: inline-block;
+             color: inherit;
+             text-decoration: none;
+         }
+
+         .books.list .book .meta .series .index {
+             display: inline-block;
+             color: inherit;
+             text-decoration: none;
+         }
+
+         @media only screen and (max-width: 600px) {
+             .books.cards .book {
+                 margin: 7px;
+             }
+         }
+
+         .items.cards {
+             display: flex;
+             flex-wrap: wrap;
+             align-items: flex-start;
+             justify-content: center;
+         }
+
+         .items.cards .item,
+         .items.cards .item:link,
+         .items.cards .item:visited {
+             flex: 0 0 150px;
+             width: 150px;
+             display: inline-block;
+             margin: 5px;
+             padding: 5px;
+             border: 1px solid #d3d3d3;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             -o-text-overflow: ellipsis;
+             -webkit-text-overflow: ellipsis;
+             color: inherit;
+             text-decoration: none;
+             border-radius: 4px;
+         }
+
+         .items.cards .item:hover {
+             border: 1px solid #b0b0b0;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
+         }
+
+         .items.list {
+             display: block;
+             margin: 10px 5px;
+         }
+
+         .items.list .item,
+         .items.list .item:link,
+         .items.list .item:visited {
+             display: block;
+             border-bottom: 1px solid rgba(0, 0, 0, .15);
+             margin: 0 5px;
+             padding: 10px 5px;
+             padding-bottom: 5px;
+             color: inherit;
+             text-decoration: none;
+             /**/
+             margin: 10px 5px;
+             border: 1px solid #d3d3d3;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+             border-radius: 2px;
+         }
+
+         .items.list .item:hover {
+             /*background: rgba(0,0,0,.05);*/
+             border: 1px solid #b0b0b0;
+             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
+         }
+
+
+         .bar {
+             display: flex;
+             box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
+             padding: 10px;
+             margin-bottom: 10px;
+         }
+
+
+         .bar .view {
+             margin-left: 10px;
+             display: flex;
+             flex: 0 0 auto;
+             border: 1px solid rgba(0, 0, 0, .15);
+             border-radius: 4px;
+         }
+
+         .bar .view .view-list {
+             border-left: 1px solid rgba(0, 0, 0, .15);
+         }
+
+         .bar .view .button,
+         .bar .view .button:link,
+         .bar .view .button:visited {
+             line-height: 2;
+             padding: 2px 10px;
+             color: #000;
+         }
+
+         .bar .view .button:hover,
+         .bar .view .button.active {
+             background: #ddd;
+             color: #000;
+         }
+
+         a:link,
+         a:visited {
+             color: #0074D9;
+             outline: 0;
+         }
+
+         a:hover {
+             color: #004479;
+         }
+        </style>
+    </head>
+
+    <body>
+        <img src="">
+        <div class="body-wrapper">
+            
+            <div class="bar">
+                
+                <h1 class="title">{{ directory | escape }}</h1>
+                <div class="view">
+                    <a class="button view-cards">
+                        <i class="fa fa-th"></i>
+                    </a>
+                    <a class="button view-list">
+                        <i class="fa fa-th-list"></i>
+                    </a>
+                </div>
+                
+            </div>
+            <div class="current-view books cards">
+                {% for file in files %}
+                    <div class="book" title="{{ file.name | escape }}">
+                        <a href="{{ file.name | url_encode | replace: '+', '%20' }}" class="cover">
+                            <img src="data:image/jpeg;base64,{{ file.cover }}" alt="cover">
+                        </a>
+                        <div class="meta">
+                            <a href="{{ file.name | url_encode | replace: '+', '%20' }}" class="title">{{ file.name | escape }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </body>
+    <script type="text/javascript">
+     var v = document.querySelector(".current-view");
+     var d = "cards";
+     var lb = document.querySelector(".view-list");
+     var cb = document.querySelector(".view-cards");
+
+     var getCurrentView = function() {
+         var c = "";
+         if (v.classList.contains("list")) {
+             c = "list";
+         } if (v.classList.contains("cards")) {
+             c = "cards";
+         } else {
+             c = d.toString();
+         }
+     };
+
+     var setCurrentView = function(c) {
+         v.classList.remove("list");
+         v.classList.remove("cards");
+         v.classList.add(c);
+
+         if (cb) {
+             if (c == "cards") {
+                 cb.classList.add("active");
+             } else {
+                 cb.classList.remove("active");
+             }
+         }
+
+         if (lb) {
+             if (c == "list") {
+                 lb.classList.add("active");
+             } else {
+                 lb.classList.remove("active");
+             }
+         }
+     };
+
+     lb.addEventListener("click", function() {
+         setCurrentView("list");
+     });
+
+     cb.addEventListener("click", function() {
+         setCurrentView("cards");
+     });
+     
+     setCurrentView(d);
+    </script>
+</html>
